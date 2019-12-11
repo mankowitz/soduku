@@ -42,14 +42,19 @@ class SodukuState extends State<Soduku> {
   int _remaining = 81;
 
   @override
-  Widget build(BuildContext context) {
-    //var size = MediaQuery.of(context).size;
+  void initState() {
+    super.initState();
 
     final String _starting =
-        //     "934500060005067090000040503000000009601070402800000000206090000090280700080004926";
         "750943002024005090300020000140089005093050170500360024000070009070400810400198057";
+    //     "934500060005067090000040503000000009601070402800000000206090000090280700080004926";
     ss = new SodukuSolver(_starting);
     _list = ss.getList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    //var size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(title: Text('Soduku solver'), actions: <Widget>[
@@ -230,7 +235,6 @@ class SodukuSolver {
   int whichBox(int x, int y) {
     return (y ~/ 3 + 3 * (x ~/ 3));
   }
-
 
   int fillIncompleteRow(int x) {
     if (rows[x].length == 8) {
