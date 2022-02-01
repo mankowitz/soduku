@@ -31,7 +31,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: "Soduku solver", home: Soduku());
+    return MaterialApp(title: "Soduku Solver", home: Soduku());
   }
 }
 
@@ -66,18 +66,14 @@ class SodukuState extends State<Soduku> {
           },
         ),
 
-        FlatButton(
-          textColor: Colors.white,
+        TextButton(
           onPressed: () {},
           child: Text("$_remaining left"),
-          shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
         ),
 
-        FlatButton(
-          textColor: Colors.white,
+        TextButton(
           onPressed: () {},
           child: Text("$_changes new"),
-          shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
         ),
       ]),
       body: _buildGrid(),
@@ -151,8 +147,8 @@ class SodukuSolver {
   List<List<Set<int>>> _possibles;
 
   SodukuSolver(String starting) {
-    _gridState = new List.generate(9, (_) => new List(9));
-    _possibles = new List.generate(9, (_) => new List(9));
+    _gridState = List.generate(9, (_) => List.filled(9, 0));
+    _possibles = List.generate(9, (_) => List.generate(9, (_) => Set()));
     for (int x = 0; x < 9; x++)
       for (int y = 0; y < 9; y++)
         _gridState[x][y] = int.parse(starting[x * 9 + y]);
@@ -170,7 +166,7 @@ class SodukuSolver {
   }
 
   List<String> getList() {
-    List<String> list = List<String>(81);
+    List<String> list = List<String>.filled(81, " ");
     for (int y = 0; y < 9; y++) {
       for (int x = 0; x < 9; x++) {
         int val = _gridState[x][y];
